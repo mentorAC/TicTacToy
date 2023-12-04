@@ -14,7 +14,15 @@
 #define GREEN_COLOR 2
 
 using namespace std;
+void Draw() {
 
+}
+void Input() {
+
+}
+void Logic() {
+
+}
 int main() {
 
     return 0;
