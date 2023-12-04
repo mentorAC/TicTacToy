@@ -87,13 +87,81 @@ bool WhoIsWinner(int size, char field[][3], char ch) {
     }
     return false;
 }
-void Input() {
+void Input(int& y, int& x, bool& isCross, char field[][3]) {
 
+    char ch = _getwch();
+    cout << "\r";
+
+    if (ch == UP && y != 0) {
+        y--;
+    }
+    else if (ch == DOWN && y != 2) {
+        y++;
+    }
+    else if (ch == RIGHT && x != 2) {
+        x++;
+    }
+    else if (ch == LEFT && x != 0) {
+        x--;
+    }
+
+    else if (ch == ENTER && field[y][x] == ' ') {
+        field[y][x] = (isCross ? CROSS : CIRCLE);
+        isCross = !isCross;
+    }
 }
-void Logic() {
 
+void SetUp(char field[][3], int size) {
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO cursorInfo;
+    GetConsoleCursorInfo(h, &cursorInfo);
+    cursorInfo.bVisible = false;
+    SetConsoleCursorInfo(h, &cursorInfo);
+
+    clearField(size, field);
+}
+bool IsAllBusy(int size, char field[][3]) {
+
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            if (field[i][j] == ' ') {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 int main() {
+    const int size = 3;
+    char field[size][size];
+
+    SetUp(field, size);
+
+    int x = 1, y = 1;
+    bool isCross = true;
+    while (true) {
+        Draw(size, field, y, x, isCross);
+
+        int countX = 0, countO = 0;
+        int e = 0;
+        if (WhoIsWinner(size, field, CROSS)) {
+            cout << "X is winner!";
+        }
+        else if (WhoIsWinner(size, field, CIRCLE)) {
+            cout << "O is winner!";
+        }
+        else if (IsAllBusy(size, field)) {
+            cout << "DRAW!!!";
+        }
+        Input(y, x, isCross, field);
+
+        HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+        COORD cls;
+        cls.Y = 0;
+        cls.X = 0;
+        SetConsoleCursorPosition(h, cls);
+
+    }
 
     return 0;
 }
