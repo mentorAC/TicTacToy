@@ -15,6 +15,15 @@
 #define GREEN_COLOR 2
 
 using namespace std;
+
+void clearField(int size, char field[][3]) {
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            field[i][j] = ' ';
+        }
+    }
+}
+
 void Draw(int size, char field[][3], int y, int x, bool isCross) {
     HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
     cout << "+---+---+---+\n";
