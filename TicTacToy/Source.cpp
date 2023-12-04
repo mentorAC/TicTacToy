@@ -156,10 +156,8 @@ int main() {
         Input(y, x, isCross, field);
 
         HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-        COORD cls;
-        cls.Y = 0;
-        cls.X = 0;
-        SetConsoleCursorPosition(h, cls);
+
+        SetConsoleCursorPosition(h, COORD{0, 0});
 
     }
 
