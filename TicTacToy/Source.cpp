@@ -36,6 +36,48 @@ void Draw(int size, char field[][3], int y, int x, bool isCross) {
         cout << "\n+---+---+---+\n";
     }
 }
+
+bool WhoIsWinner(int size, char field[][3], char ch) {
+    int countX = 0, countO = 0;
+    int combI[8][3]{
+        {0,0,0},
+        {1,1,1},
+        {2,2,2},
+        {0,1,2},
+        {0,1,2},
+        {0,1,2},
+        {0,1,2},
+        {0,1,2}
+    };
+    int combJ[8][3]{
+        {0,1,2},
+        {0,1,2},
+        {0,1,2},
+        {0,0,0},
+        {1,1,1},
+        {2,2,2},
+        {0,1,2},
+        {2,1,0}
+
+    };
+
+    for (int i = 0; i < 8; i++)
+    {
+        int count = 0;
+        for (int j = 0; j < 3; j++)
+        {
+            int i_ = combI[i][j];
+            int j_ = combJ[i][j];
+            if (field[i_][j_] == ch) {
+                count++;
+            }
+        }
+        if (count == 3) {
+            return true;
+        }
+    }
+    return false;
+}
 void Input() {
 
 }
