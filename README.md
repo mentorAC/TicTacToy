@@ -16,7 +16,7 @@
 1. Клонуйте репозиторій:
 
 ```bash
-git clone https://github.com/your-username/tic-tac-toe.git
+git clone https://github.com/mentorAC/TicTacToy.git
 ```
 
 2. Компіляція програми:
